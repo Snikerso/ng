@@ -121,6 +121,8 @@ function GameStartItem({item, sessionData, modalEditUser, setModalEditUser}) {
 
     const [claimControl , setClaimControl] = useState(false)
     const [tasks, setTasks] = useState()
+    const [gameState, setGameState] = useState()
+    
     
 
     
@@ -237,9 +239,13 @@ function GameStartItem({item, sessionData, modalEditUser, setModalEditUser}) {
                             <button></button>
                             <button onClick={()=>handleStartGame(formikStartGame.values)}>Start experiment</button>
                             <button onClick={() => handleStopGame()}>StopGame</button>
-
-                            <button onClick={() => handleDiscardData()}>Discard Data</button>
-                            <button onClick={() => handleSaveData()}>SaveData</button>
+                            {false && ( 
+                                <>
+                                    <button onClick={() => handleDiscardData()}>Discard Data</button>
+                                    <button onClick={() => handleSaveData()}>SaveData</button>
+                                </>
+                             )}
+                            
 
                         </form>
 

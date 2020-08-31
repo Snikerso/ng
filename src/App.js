@@ -2,6 +2,7 @@ import React,{useState,useEffect,useReducer} from 'react';
 import styled from 'styled-components';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import {CookiesProvider} from 'react-cookie';
+import axios from 'axios';
 
 import MainTemplate from 'components/Templates/MainTemplate'
 
@@ -109,11 +110,12 @@ function App() {
   
   return (
     <contextAuth.Provider value={{ stateAuth, dispatchAuth }} >
-      <contextGameState.Provider value={{ stateGameState, dispatchGameState }} >
-        <contextExperiments.Provider value={{ stateExperiments, dispatchExperiments }} >
-          <contextGames.Provider value={{ stateGames, dispatchGames }} >
-      <CookiesProvider>
+    <contextGameState.Provider value={{ stateGameState, dispatchGameState }} >
+      <contextExperiments.Provider value={{ stateExperiments, dispatchExperiments }} >
+        <contextGames.Provider value={{ stateGames, dispatchGames }} >
+
         <BrowserRouter>
+
           <MainTemplate>
             <HeadBar isAuthenticated={stateAuth.isAuthenticated}/>
               <StyledWrapper>
@@ -144,13 +146,15 @@ function App() {
                 }
                 </StyledWrapper>
             </MainTemplate>
-          </BrowserRouter>
-        </CookiesProvider>
 
-            </contextGames.Provider>
+          </BrowserRouter>
+
+          </contextGames.Provider>
           </contextExperiments.Provider>
         </contextGameState.Provider>
       </contextAuth.Provider>
+
+
   );
 } 
 

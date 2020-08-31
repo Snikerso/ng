@@ -1,4 +1,5 @@
 import React,{useContext} from 'react';
+import axios from 'axios';
 import {useCookies} from 'react-cookie';
 import {useHistory} from 'react-router-dom';
 import {useFormik} from 'formik';
@@ -152,26 +153,47 @@ function Login() {
     
     const credentials = { userName: "admin", password: "Admin1@", rememberMe: false }
 
-    fetch(`/api/Ath/Login`, {
-        method: 'POST',
-        cache: 'no-cache',
-        // cookie: '.AspNetCore.Identity.Application=CfDJ8MkJt5t9JS9HmLyYN32LvvKFxgpt5_yfvMaV81KDv1PIDgvHUCrNUJZUF3dqVxBxuzjMvTG28dH-Gbp6f5cvLm0ZnlY7p9BswXb_qdS2uZ01vzY6vHhNMOiVhkE7HT5eS9qNF9_BvMBhfcYGkZbheuKrDSM1Jh0Y5vZ8Ld_hQJ-iTXUUt_Uo5imICYQQefbaUWCoAi765Knt3biNWJanmkr4QbLoAQjZdrItiuvWCbRunKkwmI21bWjAsvL-oOJ3joFF2j7tMDFtho17LJmd5zEhVqZMA4SwB2QooCf9SuHvQR0AQAINul_gSHOq6FQqOIXxu4_1X8FgANvEtSRBOGf-BZtd1GYolAaf46uf5ud5otuwjI11GjRCAZBU-zBHFwGQOWoub_geCJSIWulW9i9OZB4BWGtgVr8aeck1N-MTg0481NARr2I7EiFw7P65ofs05Lp0QjCfkh-xiyKp9XmGg3A47j9SsD3BpFG0WEwDNYKpGh9EuBj07KhWGY7o_fEkqR6ssJ26L0RjFhifzVIyX3NInF778zUXDI5J2-7XJaGricQKvDPtw5SNNK0OZuOgvV8x-cC2EZD39ZrjMuW2olT9jXg4pKHjYg0IS-g_nA9kHn9AVG4Rmfe9uqWsyLkvf7-aseUIahb-2t9JBv_8Uba_2BCWE-lRHgmEx6Fw7Jk0DZJqFom3sKfeU4GGNGS8YUAdfQ4szkEXb6n1nf8; expires=Wed, 26 Aug 2020 08:18:58 GMT; path=/; secure; samesite=lax',
-        headers: myHeaders,
+    axios.post(`/api/Ath/Login`,credentials, {
+      data: {
+        userName: "admin", password: "Admin1@", rememberMe: false
+      },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cookie' : document.cookie },
 
-        credentials: 'include',
-        body: JSON.stringify(loginValues),
-        
-    })
-        .then((res) => res.json(),
-          
-        )
-        .then(data =>dispatchAuth({type:'LOGIN',data}),
-        history.push('/')
-        )
-        .catch(
-            error => console.error(error)
-        )
+      }).then(res => console.log(res))
+
+    // fetch(`/api/Ath/Login`, {
+    //     method: 'POST',
+    //     cache: 'no-cache',
+    //     // cookie: '.AspNetCore.Identity.Application=CfDJ8MkJt5t9JS9HmLyYN32LvvKFxgpt5_yfvMaV81KDv1PIDgvHUCrNUJZUF3dqVxBxuzjMvTG28dH-Gbp6f5cvLm0ZnlY7p9BswXb_qdS2uZ01vzY6vHhNMOiVhkE7HT5eS9qNF9_BvMBhfcYGkZbheuKrDSM1Jh0Y5vZ8Ld_hQJ-iTXUUt_Uo5imICYQQefbaUWCoAi765Knt3biNWJanmkr4QbLoAQjZdrItiuvWCbRunKkwmI21bWjAsvL-oOJ3joFF2j7tMDFtho17LJmd5zEhVqZMA4SwB2QooCf9SuHvQR0AQAINul_gSHOq6FQqOIXxu4_1X8FgANvEtSRBOGf-BZtd1GYolAaf46uf5ud5otuwjI11GjRCAZBU-zBHFwGQOWoub_geCJSIWulW9i9OZB4BWGtgVr8aeck1N-MTg0481NARr2I7EiFw7P65ofs05Lp0QjCfkh-xiyKp9XmGg3A47j9SsD3BpFG0WEwDNYKpGh9EuBj07KhWGY7o_fEkqR6ssJ26L0RjFhifzVIyX3NInF778zUXDI5J2-7XJaGricQKvDPtw5SNNK0OZuOgvV8x-cC2EZD39ZrjMuW2olT9jXg4pKHjYg0IS-g_nA9kHn9AVG4Rmfe9uqWsyLkvf7-aseUIahb-2t9JBv_8Uba_2BCWE-lRHgmEx6Fw7Jk0DZJqFom3sKfeU4GGNGS8YUAdfQ4szkEXb6n1nf8; expires=Wed, 26 Aug 2020 08:18:58 GMT; path=/; secure; samesite=lax',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json; charset=utf-8',
+    //       'Cookie' : document.cookie },
+    //     credentials: 'include',
+    //     body: JSON.stringify(loginValues),
   
+    // }).then((res) => res)
+    //     // .then(data =>
+    //     //   dispatchAuth({type:'LOGIN',data}),
+    //     // )
+    //     .catch(error => console.error(error)) 
+
+        fetch("/api/Ath/UserInfo", {
+          method: 'GET',
+          credentials: 'include',
+          headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json; charset=utf-8',
+            'Cookie' : document.cookie },
+      })
+          .then(res => res.ok &&( res.json()))
+          .then(data=>(
+            dispatchAuth({type:'LOGIN',data}),
+          window.location.href= "/" ) 
+          )
   }
 
   const formik = useFormik({
@@ -191,7 +213,7 @@ function Login() {
     const handleGetUserInfo =  (e) => {
       e.preventDefault()
 
-      fetch("", {
+      fetch("/api/Ath/UserInfo", {
           method: 'GET',
           // mode: 'cors',
           credentials: 'include',
@@ -201,9 +223,6 @@ function Login() {
             'Content-Type': 'application/json; charset=utf-8',
             'Cookie' : document.cookie },
           body:JSON.stringify({title:'dsadsad'})
-
-          
-          
       })
           .then((data) => data.json())
           .then(data => console.log(data))

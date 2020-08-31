@@ -72,7 +72,7 @@ const StyledWrapperNavAvatar= styled.nav`
 `;
 
 
-function Header() {
+function Navigation() {
   const {stateAuth} = useContext(contextAuth);
 
 
@@ -99,8 +99,7 @@ function Header() {
         </StyledWrapperNavBottom>
 
   </StyledWrapper>
-    ):
-    (
+    ):(
         <StyledWrapper>
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/login'>Login</NavLink>
@@ -111,4 +110,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Navigation;

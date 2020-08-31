@@ -59,13 +59,14 @@ function Head() {
             <StyledWrapperInner>
                 <Header isAuthenticated={stateAuth.isAuthenticated }/>
                 <LogoUmk/>
-                {stateAuth.isAuthenticated && (
+                {stateAuth.isAuthenticated ? (
                     <StyledWrapperInnerButtons>
-                        <HeadItem path={'/login'} asset={'back'}/>
                         <HeadItem path={'/login'} asset={'usersettings'}/>
                         <HeadItem path={'/login'} asset={'logout'}/>
                     </StyledWrapperInnerButtons>
-                )}
+                ):(<StyledWrapperInnerButtons>
+                    <HeadItem path={'/login'} asset={'logout'}/>
+                </StyledWrapperInnerButtons>)}
             </StyledWrapperInner>
         </StyledWrapper>
     

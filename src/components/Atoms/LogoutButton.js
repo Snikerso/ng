@@ -57,8 +57,11 @@ function LogoutButton() {
             headers: myHeaders,
             credentials: 'include',
         })
-            .then((res) => console.log(res),
-            dispatchAuth({type:'LOGOUT',initLogout}),
+            .then((res) => {if(res.ok) { 
+              dispatchAuth({type:'LOGOUT',initLogout}); 
+              window.location.href='/login'
+            }  },
+         
 
             )
             .catch(
